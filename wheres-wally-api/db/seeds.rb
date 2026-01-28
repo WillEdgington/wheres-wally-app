@@ -7,3 +7,12 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+image = Image.create!(
+  title: "Film Set"
+)
+
+Character.create!([
+  { name: "Wally", x: 34.2, y: 67.9, image: image },
+  { name: "Wizard", x: 12.5, y: 45.3, image: image },
+  { name: "Wilma", x: 78.1, y: 22.4, image: image }
+])
