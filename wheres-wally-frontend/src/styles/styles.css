@@ -1,0 +1,32 @@
+.game-board {
+  position: relative;
+  display: inline-block;
+}
+
+.game-board img {
+  display: block;
+  max-width: 100%;
+}
+
+.target-box {
+  position: absolute;
+  background: white;
+  border: 2px solid black;
+  padding: 4px;
+  transform: translate(-50%, -50%);
+}
+
+.character-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.character-menu li {
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.character-menu li:hover {
+    background: #eee;
+}
