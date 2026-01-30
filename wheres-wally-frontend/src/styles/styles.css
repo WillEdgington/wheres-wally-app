@@ -30,3 +30,19 @@
 .character-menu li:hover {
     background: #eee;
 }
+
+.character-menu li.found {
+  opacity: 0.4;
+  pointer-events: none;
+  text-decoration: line-through;
+}
+
+.found-marker {
+  position: absolute;
+  width: 4%;
+  height: 4%;
+  border-radius: 50%;
+  border: 2px solid black;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}

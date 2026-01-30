@@ -1,7 +1,11 @@
+import { useState } from "react";
 import TargetBox from "./TargetBox"
 import scene from "../assets/scene.jpg";
+import FoundMarker from "./FoundMarker";
 
 export default function Gameboard({ target, setTarget }) {
+  const [foundCharacters, setFoundCharacters] = useState({});
+
   function handleBoardClick(e) {
     e.stopPropagation()
     const img = e.currentTarget;
@@ -14,7 +18,7 @@ export default function Gameboard({ target, setTarget }) {
   }
 
   async function handleCharacterSelect(characterName) {
-    if (!target) return;
+    if (!target || foundCharacters[characterName]) return;
 
     const response = await fetch("http://localhost:3000/api/validate", {
       method: "POST",
@@ -27,12 +31,17 @@ export default function Gameboard({ target, setTarget }) {
       })
     });
     const data = await response.json();
-    data.correct ? alert("Correct!") : alert("Incorrect!");
+    if (data.correct) {
+      setFoundCharacters(prev =>
+        characterName in prev
+        ? prev
+        : {
+          ...prev,
+          [characterName]: { x: data.x, y: data.y }
+        }
+      );
+    }
 
-    setTarget(null);
-  }
-
-  function clearTarget() {
     setTarget(null);
   }
 
@@ -51,8 +60,16 @@ export default function Gameboard({ target, setTarget }) {
           x={target.x}
           y={target.y}
           onSelect={handleCharacterSelect}
+          foundCharacters={foundCharacters}
         />
       )}
+
+      {Object.keys(foundCharacters).map((character) => (
+        <FoundMarker
+          character={character}
+          data={foundCharacters[character]}
+        />
+      ))}
     </div>
   );
 }

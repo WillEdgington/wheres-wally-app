@@ -1,6 +1,6 @@
 import CharacterMenu from "./CharacterMenu";
 
-export default function TargetBox({ x, y, onSelect }) {
+export default function TargetBox({ x, y, onSelect, foundCharacters }) {
   return (
     <div
       className="target-box"
@@ -10,7 +10,10 @@ export default function TargetBox({ x, y, onSelect }) {
       }}
       onClick={(e) => e.stopPropagation()}
     >
-      <CharacterMenu onSelect={onSelect} />
+      <CharacterMenu 
+        onSelect={onSelect}
+        foundCharacters={foundCharacters}
+      />
     </div>
   );
 }

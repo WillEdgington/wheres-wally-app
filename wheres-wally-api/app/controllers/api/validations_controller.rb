@@ -11,7 +11,17 @@ class Api::ValidationsController < ApplicationController
     correct =
       (character.x - x).abs <= TOLERANCE &&
       (character.y - y).abs <= TOLERANCE
-
-    render json: { correct: correct }
+    if (correct)
+      render json: {
+        correct: correct,
+        name: character.name,
+        x: character.x,
+        y: character.y,
+      }
+    else
+      render json: {
+        correct: correct
+      }
+    end
   end
 end
