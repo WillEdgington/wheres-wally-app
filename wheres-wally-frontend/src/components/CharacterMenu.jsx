@@ -1,9 +1,7 @@
-const CHARACTERS = ["Wally", "Wilma", "Wizard"];
-
-export default function CharacterMenu({ onSelect, foundCharacters }) {
+export default function CharacterMenu({ onSelect, foundCharacters, characters }) {
   return (
     <ul className="character-menu">
-      {CHARACTERS.map((name) => (
+      {characters.map((name) => (
         <li 
           key={name}
           className={name in foundCharacters ? "found": ""} 

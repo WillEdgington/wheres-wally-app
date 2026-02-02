@@ -46,3 +46,22 @@
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
+
+.game-timer {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+
+  padding: 6px 10px;
+  border-radius: 6px;
+
+  font-family: "SF-Mono", "Roboto Mono", monospace;
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  letter-spacing: 0.05em;
+  z-index: 10;
+}

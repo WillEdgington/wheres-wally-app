@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TargetBox from "./TargetBox"
 import scene from "../assets/scene.jpg";
 import FoundMarker from "./FoundMarker";
+import Timer from "./Timer";
+
+const APIURL = "http://localhost:3000/"
+const CHARACTERS = ["Wally", "Wilma", "Wizard"];
 
 export default function Gameboard({ target, setTarget }) {
   const [foundCharacters, setFoundCharacters] = useState({});
+  const [sessionId, setSessionId] = useState(null);
+  const [startTime, setStartTime] = useState(null);
+  const [duration, setDuration] = useState(null);
 
   function handleBoardClick(e) {
     e.stopPropagation()
@@ -20,7 +27,7 @@ export default function Gameboard({ target, setTarget }) {
   async function handleCharacterSelect(characterName) {
     if (!target || foundCharacters[characterName]) return;
 
-    const response = await fetch("http://localhost:3000/api/validate", {
+    const response = await fetch(`${APIURL}api/validate`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -30,26 +37,57 @@ export default function Gameboard({ target, setTarget }) {
         y: target.y
       })
     });
+
     const data = await response.json();
     if (data.correct) {
-      setFoundCharacters(prev =>
-        characterName in prev
-        ? prev
-        : {
+      setFoundCharacters(prev => {
+        if (prev[data.name]) return prev;
+        
+        const next = {
           ...prev,
-          [characterName]: { x: data.x, y: data.y }
+          [data.name]: { x: data.x, y: data.y }
+        };
+
+        if (
+          sessionId &&
+          Object.keys(next).length === CHARACTERS.length
+        ) {
+          fetch(`${APIURL}api/game_sessions/${sessionId}/complete`, {
+            method: "PATCH"
+          })
+            .then(res => res.json())
+            .then(data => setDuration(data.duration));
         }
-      );
+
+        return next
+      });
     }
 
     setTarget(null);
   }
+
+  useEffect(() => {
+    async function startSession() {
+      const res = await fetch(`${APIURL}api/game_sessions`, {
+        method: "POST"
+      });
+      const data = await res.json();
+      setSessionId(data.id);
+      setStartTime(Date.now());
+    }
+
+    startSession();
+  }, []);
 
   return (
     <div
       className="game-board"
       onClick={handleBoardClick}
     >
+      <Timer 
+        startTime={startTime}
+        duration={duration}
+      />
       <img
         src={scene}
         alt="Find the characters"
@@ -61,6 +99,7 @@ export default function Gameboard({ target, setTarget }) {
           y={target.y}
           onSelect={handleCharacterSelect}
           foundCharacters={foundCharacters}
+          characters={CHARACTERS}
         />
       )}
 

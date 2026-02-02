@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
+    post "game_sessions", to: "game_sessions#create"
+    patch "game_sessions/:id/complete", to: "game_sessions#complete"
     post "validate", to: "validations#check"
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
