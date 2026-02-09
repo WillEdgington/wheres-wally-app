@@ -1,6 +1,11 @@
 class Api::GameSessionsController < ApplicationController
   def create
-    session = GameSession.create!(started_at: Time.current)
+    image = Image.find(params[:image_id])
+
+    session = GameSession.create!(
+      image: image,
+      started_at: Time.current
+    )
     render json: {
       id: session.id,
       started_at: session.started_at

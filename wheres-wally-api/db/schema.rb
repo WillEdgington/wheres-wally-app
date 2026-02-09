@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_01_28_114410) do
+ActiveRecord::Schema[8.0].define(version: 2026_02_04_175719) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -29,6 +29,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_01_28_114410) do
     t.datetime "completed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "image_id", null: false
+    t.index ["image_id"], name: "index_game_sessions_on_image_id"
   end
 
   create_table "images", force: :cascade do |t|
@@ -47,5 +49,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_01_28_114410) do
   end
 
   add_foreign_key "characters", "images"
+  add_foreign_key "game_sessions", "images"
   add_foreign_key "scores", "images"
 end

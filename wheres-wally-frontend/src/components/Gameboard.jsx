@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import TargetBox from "./TargetBox"
-import scene from "../assets/scene.jpg";
 import FoundMarker from "./FoundMarker";
 import Timer from "./Timer";
+import { SCENES } from "../scenes";
 
 const APIURL = "http://localhost:3000/"
-const CHARACTERS = ["Wally", "Wilma", "Wizard"];
 
-export default function Gameboard({ target, setTarget }) {
+export default function Gameboard({ imageId, target, setTarget }) {
   const [foundCharacters, setFoundCharacters] = useState({});
   const [sessionId, setSessionId] = useState(null);
   const [startTime, setStartTime] = useState(null);
   const [duration, setDuration] = useState(null);
+  const [characters, setCharacters] = useState([]);
 
   function handleBoardClick(e) {
     e.stopPropagation()
@@ -31,7 +31,7 @@ export default function Gameboard({ target, setTarget }) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        image_id: 1,
+        image_id: imageId,
         character: characterName,
         x: target.x,
         y: target.y
@@ -42,42 +42,62 @@ export default function Gameboard({ target, setTarget }) {
     if (data.correct) {
       setFoundCharacters(prev => {
         if (prev[data.name]) return prev;
-        
-        const next = {
+
+        return {
           ...prev,
           [data.name]: { x: data.x, y: data.y }
         };
-
-        if (
-          sessionId &&
-          Object.keys(next).length === CHARACTERS.length
-        ) {
-          fetch(`${APIURL}api/game_sessions/${sessionId}/complete`, {
-            method: "PATCH"
-          })
-            .then(res => res.json())
-            .then(data => setDuration(data.duration));
-        }
-
-        return next
       });
     }
 
     setTarget(null);
   }
 
+  const scene = SCENES.find(s => s.id === imageId)?.image;
+  if (!scene) {
+    return null;
+  }
+
+  useEffect(() => {
+    fetch(`${APIURL}api/images/${imageId}/characters`)
+      .then(res => res.json())
+      .then(data => setCharacters(data.map(c => c.name)));
+  }, [imageId]);
+
   useEffect(() => {
     async function startSession() {
       const res = await fetch(`${APIURL}api/game_sessions`, {
-        method: "POST"
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          image_id: imageId
+        })
       });
+
       const data = await res.json();
       setSessionId(data.id);
       setStartTime(Date.now());
     }
 
     startSession();
-  }, []);
+  }, [imageId]);
+
+  useEffect(() => {
+    if (
+      !sessionId ||
+      characters.length === 0 ||
+      Object.keys(foundCharacters).length !== characters.length
+    ) {
+      return;
+    }
+
+    fetch(`${APIURL}api/game_sessions/${sessionId}/complete`, {
+      method: "PATCH",
+    })
+      .then(res => res.json())
+      .then(data => setDuration(data.duration));
+
+  }, [foundCharacters, characters, sessionId]);
 
   return (
     <div
@@ -99,7 +119,7 @@ export default function Gameboard({ target, setTarget }) {
           y={target.y}
           onSelect={handleCharacterSelect}
           foundCharacters={foundCharacters}
-          characters={CHARACTERS}
+          characters={characters}
         />
       )}
 

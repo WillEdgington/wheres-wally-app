@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   namespace :api do
+    get "characters/index"
+    resources :images, only: [:index, :show] do
+      resources :characters, only: [:index]
+    end
     post "game_sessions", to: "game_sessions#create"
     patch "game_sessions/:id/complete", to: "game_sessions#complete"
     post "validate", to: "validations#check"

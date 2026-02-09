@@ -14,5 +14,7 @@ image = Image.create!(
 Character.create!([
   { name: "Wally", x: 91.8, y: 55.7, image: image },
   { name: "Wizard", x: 67.1, y: 72.5, image: image },
-  { name: "Wilma", x: 82.8, y: 58.1, image: image }
+  { name: "Wilma", x: 82.8, y: 58.1, image: image },
+  { name: "Woof", x: 80.8, y: 89.8, image: image},
+  { name: "Odlaw", x: 5.2, y: 49.6, image: image},
 ])
