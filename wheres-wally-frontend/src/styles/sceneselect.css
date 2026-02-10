@@ -1,0 +1,84 @@
+.scene-grid {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1.75rem;
+  padding: 2.5rem;
+  max-width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.scene-card {
+  flex: 0 0 min(360px, 80vw);
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  scroll-snap-align: start;
+}
+
+.scene-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+}
+
+.scene-card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.scene-card h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0.75rem 1rem 0.5rem;
+  color: #111827;
+}
+
+.scene-card button {
+  margin: 0.75rem 1rem 1rem;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  background: #1f2937;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.scene-card button:hover {
+  background: #111827;
+}
+
+.scene-header {
+  text-align: center;
+  padding-top: 2.5rem;
+}
+
+.scene-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+}
+
+.scene-header p {
+  color: #4b5563;
+}
+
+.scene-grid {
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db transparent;
+}
+
+.scene-grid::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scene-grid::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}

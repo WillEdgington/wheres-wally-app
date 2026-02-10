@@ -1,0 +1,67 @@
+.game-board {
+  position: relative;
+  display: inline-block;
+}
+
+.game-board img {
+  display: block;
+  max-width: 100%;
+}
+
+.target-box {
+  position: absolute;
+  background: white;
+  border: 2px solid black;
+  padding: 4px;
+  transform: translate(-50%, -50%);
+}
+
+.character-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.character-menu li {
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.character-menu li:hover {
+    background: #eee;
+}
+
+.character-menu li.found {
+  opacity: 0.4;
+  pointer-events: none;
+  text-decoration: line-through;
+}
+
+.found-marker {
+  position: absolute;
+  width: 4%;
+  height: 4%;
+  border-radius: 50%;
+  border: 2px solid black;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.game-timer {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+
+  padding: 6px 10px;
+  border-radius: 6px;
+
+  font-family: "SF-Mono", "Roboto Mono", monospace;
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  letter-spacing: 0.05em;
+  z-index: 10;
+}
