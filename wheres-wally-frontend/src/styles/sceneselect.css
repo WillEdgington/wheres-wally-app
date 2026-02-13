@@ -1,11 +1,16 @@
+.scene-carousel {
+  position: relative;
+  width: 100%;
+}
+
 .scene-grid {
   display: flex;
   justify-content: flex-start;
   gap: 1.75rem;
-  padding: 2.5rem;
-  max-width: 100%;
+  /* padding: 2.5rem; */
+  width: 100%;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: none;
 }
 
 .scene-card {
@@ -17,7 +22,6 @@
   display: flex;
   flex-direction: column;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
-  scroll-snap-align: start;
 }
 
 .scene-card:hover {
@@ -69,16 +73,38 @@
   color: #4b5563;
 }
 
-.scene-grid {
-  scrollbar-width: thin;
-  scrollbar-color: #d1d5db transparent;
+/* scrollbar */
+
+.scene-grid,
+.scene-carousel {
+  overflow-x: auto;
+  scrollbar-width: none;
 }
 
-.scene-grid::-webkit-scrollbar {
+.scene-grid::-webkit-scrollbar,
+.scene-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-scrollbar {
+  width: 70%;
   height: 8px;
+  background: #d1d5db;
+  border-radius: 999px;
+  margin: 2rem auto;
+  position: relative;
 }
 
-.scene-grid::-webkit-scrollbar-thumb {
-  background: #d1d5db;
-  border-radius: 4px;
+.carousel-thumb {
+  position: absolute;
+  height: 100%;
+  background: #111;
+  border-radius: 999px;
+  cursor: grab;
+  transform: translate3d(0px, 0px, 0px);
+}
+
+.carousel-thumb:active {
+  cursor: grabbing;
+  background-color: #080808
 }

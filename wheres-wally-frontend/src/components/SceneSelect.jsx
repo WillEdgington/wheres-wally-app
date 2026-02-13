@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { SCENES } from "../scenes";
+import Scrollbar from "./Scrollbar";
 
 const APIURL = "http://localhost:3000/";
 
 export default function SceneSelect({ onPlay }) {
   const [scenes, setScenes] = useState([]);
+  const gridRef = useRef(null);
   
   useEffect(() => {
     fetch(`${APIURL}api/images`)
@@ -28,14 +30,21 @@ export default function SceneSelect({ onPlay }) {
         <p>Select a scene to begin</p>
       </div>
 
-      <div className="scene-grid">
-        {scenes.map(scene => (
-          <div key={scene.id} className="scene-card">
-            <img src={scene.image} alt={scene.title} />
-            <h3>{scene.title}</h3>
-            <button onClick={() => onPlay(scene.id)}>Play</button>
-          </div>
-        ))}
+      <div className="scene-carousel">
+        <div ref={gridRef} className="scene-grid">
+          {scenes.map(scene => (
+            <div key={scene.id} className="scene-card">
+              <img src={scene.image} alt={scene.title} />
+              <h3>{scene.title}</h3>
+              <button onClick={() => onPlay(scene.id)}>Play</button>
+            </div>
+          ))}
+        </div>
+
+        <Scrollbar 
+          elemRef={gridRef}
+          elemName={"carousel"}
+        />
       </div>
     </>
   );
