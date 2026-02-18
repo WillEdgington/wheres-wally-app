@@ -1,16 +1,23 @@
 .scene-carousel {
   position: relative;
+  overflow: visible;
   width: 100%;
+}
+
+.scene-grid {
+  padding-top: 6px;
+  padding-bottom: 16px;
 }
 
 .scene-grid {
   display: flex;
   justify-content: flex-start;
   gap: 1.75rem;
-  /* padding: 2.5rem; */
   width: 100%;
   overflow-x: auto;
+  overflow-y: visible;
   scroll-snap-type: none;
+  scrollbar-width: none;
 }
 
 .scene-card {
@@ -75,12 +82,6 @@
 
 /* scrollbar */
 
-.scene-grid,
-.scene-carousel {
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
 .scene-grid::-webkit-scrollbar,
 .scene-carousel::-webkit-scrollbar {
   display: none;
@@ -108,3 +109,9 @@
   cursor: grabbing;
   background-color: #080808
 }
+
+/* .scene-carousel,
+.scene-grid {
+  overflow: visible !important;
+  overflow-x: clip;
+} */
