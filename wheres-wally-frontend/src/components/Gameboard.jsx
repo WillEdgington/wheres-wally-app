@@ -3,10 +3,9 @@ import TargetBox from "./TargetBox"
 import FoundMarker from "./FoundMarker";
 import Timer from "./Timer";
 import { SCENES } from "../scenes";
+import { APIURL } from "../utils/config";
 
-const APIURL = "http://localhost:3000/"
-
-export default function Gameboard({ imageId, target, setTarget }) {
+export default function Gameboard({ imageId, target, setTarget, onComplete }) {
   const [foundCharacters, setFoundCharacters] = useState({});
   const [sessionId, setSessionId] = useState(null);
   const [startTime, setStartTime] = useState(null);
@@ -95,7 +94,10 @@ export default function Gameboard({ imageId, target, setTarget }) {
       method: "PATCH",
     })
       .then(res => res.json())
-      .then(data => setDuration(data.duration));
+      .then(data => {
+        setDuration(data.duration);
+        onComplete(data.duration);
+      });
 
   }, [foundCharacters, characters, sessionId]);
 

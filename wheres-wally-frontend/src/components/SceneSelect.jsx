@@ -1,10 +1,9 @@
 import { useEffect, useState, useRef } from "react";
 import { SCENES } from "../scenes";
 import Scrollbar from "./Scrollbar";
+import { APIURL } from "../utils/config";
 
-const APIURL = "http://localhost:3000/";
-
-export default function SceneSelect({ onPlay }) {
+export default function SceneSelect({ onPlay, onPreview }) {
   const [scenes, setScenes] = useState([]);
   const gridRef = useRef(null);
   
@@ -33,10 +32,21 @@ export default function SceneSelect({ onPlay }) {
       <div className="scene-carousel">
         <div ref={gridRef} className="scene-grid">
           {scenes.map(scene => (
-            <div key={scene.id} className="scene-card">
+            <div 
+              key={scene.id} 
+              className="scene-card"
+              onClick={() => onPreview(scene.id)}
+            >
               <img src={scene.image} alt={scene.title} />
               <h3>{scene.title}</h3>
-              <button onClick={() => onPlay(scene.id)}>Play</button>
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onPlay(scene.id);
+                }}
+              >
+                Play
+              </button>
             </div>
           ))}
         </div>
