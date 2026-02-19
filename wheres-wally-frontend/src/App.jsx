@@ -12,6 +12,7 @@ export default function App() {
   const [leaderboardSceneId, setLeaderboardSceneId] = useState(null);
   const [leaderboardMode, setLeaderboardMode] = useState(null);
   const [completionTime, setCompletionTime] = useState(null);
+  const [leaderboardSessionId, setLeaderboardSessionId] = useState(null);
 
   function handlePlay(imageId) {
     setLeaderboardOpen(false);
@@ -32,9 +33,10 @@ export default function App() {
     setLeaderboardOpen(true);
   }
 
-  function openCompletion(sceneId, time) {
+  function openCompletion(sceneId, time, sessionId) {
     setLeaderboardSceneId(sceneId);
     setCompletionTime(time);
+    setLeaderboardSessionId(sessionId);
     setLeaderboardMode("complete");
     setLeaderboardOpen(true);
   }
@@ -54,7 +56,7 @@ export default function App() {
           target={target}
           setTarget={setTarget}
           onExit={handleBackToMenu}
-          onComplete={(time) => openCompletion(activeImageId, time)}
+          onComplete={(time, sessionId) => openCompletion(activeImageId, time, sessionId)}
         />
       )}
 
@@ -62,6 +64,7 @@ export default function App() {
         open={leaderboardOpen}
         mode={leaderboardMode}
         sceneId={leaderboardSceneId}
+        gameSessionId={leaderboardSessionId}
         time={completionTime}
         onClose={handleBackToMenu}
         onPlay={() => handlePlay(leaderboardSceneId)}

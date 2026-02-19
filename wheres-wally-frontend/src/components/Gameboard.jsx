@@ -96,7 +96,7 @@ export default function Gameboard({ imageId, target, setTarget, onComplete }) {
       .then(res => res.json())
       .then(data => {
         setDuration(data.duration);
-        onComplete(data.duration);
+        onComplete(data.duration, sessionId);
       });
 
   }, [foundCharacters, characters, sessionId]);
