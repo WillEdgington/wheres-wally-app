@@ -39,7 +39,8 @@ export default function SceneSelect({ onPlay, onPreview }) {
             >
               <img src={scene.image} alt={scene.title} />
               <h3>{scene.title}</h3>
-              <button 
+              <button
+                className="play-button"
                 onClick={(e) => {
                   e.stopPropagation();
                   onPlay(scene.id);
