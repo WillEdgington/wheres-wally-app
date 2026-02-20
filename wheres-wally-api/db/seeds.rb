@@ -54,3 +54,39 @@ Character.create!([
   { name: "Woof", x: 93.9, y: 28.6, image: dive },
   { name: "Odlaw", x: 30.1, y: 19.2, image: dive },
 ])
+
+space = Image.create!(
+  title: "Space Colony Chaos"
+)
+
+Character.create!([
+  { name: "Wally", x: 40.6, y: 62.4, image: space },
+  { name: "Wizard", x: 78.1, y: 57.9, image: space },
+  { name: "Wilma", x: 29.5, y: 51.9, image: space },
+  { name: "Woof", x: 58.8, y: 90.6, image: space },
+  { name: "Odlaw", x: 7.1, y: 69.0, image: space },
+])
+
+underground = Image.create!(
+  title: "The Underground Hunters"
+)
+
+Character.create!([
+  { name: "Wally", x: 86.4, y: 39.8, image: underground },
+  { name: "Wizard", x: 63.3, y: 35.0, image: underground },
+  { name: "Wilma", x: 70.6, y: 4.1, image: underground },
+  { name: "Woof", x: 88.2, y: 8.5, image: underground },
+  { name: "Odlaw", x: 16.2, y: 3.8, image: underground },
+])
+
+banquet = Image.create!(
+  title: "The Gobbling Gluttons"
+)
+
+Character.create!([
+  { name: "Wally", x: 57.1, y: 35.3, image: banquet },
+  { name: "Wizard", x: 85.1, y: 84.8, image: banquet },
+  { name: "Wilma", x: 39.0, y: 32.8, image: banquet },
+  { name: "Woof", x: 68.2, y: 61.7, image: banquet },
+  { name: "Odlaw", x: 40.3, y: 60.2, image: banquet },
+])
