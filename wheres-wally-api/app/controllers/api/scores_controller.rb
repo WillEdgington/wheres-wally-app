@@ -6,7 +6,7 @@ class Api::ScoresController < ApplicationController
                   .where(game_sessions: { image_id: image.id })
                   .order(:duration)
 
-    render json: scores.as_json(only: [:id, :name, :duration])
+    render json: scores.as_json(only: [:id, :name, :duration, :game_session_id])
   end
 
   def create
@@ -22,6 +22,6 @@ class Api::ScoresController < ApplicationController
       game_session: session
     )
 
-    render json: score.as_json(only: [:id, :name, :duration])
+    render json: score.as_json(only: [:id, :name, :duration, :game_session_id])
   end
 end

@@ -22,6 +22,7 @@ export default function App() {
 
   function handleBackToMenu() {
     setLeaderboardOpen(false);
+    setLeaderboardSessionId(null);
     setActiveImageId(null);
     setTarget(null);
     setView("menu");
