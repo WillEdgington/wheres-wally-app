@@ -128,15 +128,15 @@ export default function Leaderboard({ open, mode, sceneId, gameSessionId, time, 
 
           {leaderboardList()}
 
-          {mode === "complete" 
-            ? completionSection(time)
-            : mode === "preview" && (
-                <button
-                  className="play-button" 
-                  onClick={onPlay}
-                >Play</button>
-            )
-          }
+          {mode === "complete" && ( 
+            completionSection(time)
+          )}
+
+          <button
+            className="play-button" 
+            onClick={onPlay}
+          >{mode === "complete" ? "Next" : "Play" }</button>
+
           <button className="home-button" onClick={onClose}>
             Home
           </button>

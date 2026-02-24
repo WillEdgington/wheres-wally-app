@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Gameboard from './components/Gameboard';
 import SceneSelect from './components/SceneSelect';
 import Leaderboard from './components/Leaderboard';
+import { APIURL } from './utils/config';
 
 export default function App() {
   const [target, setTarget] = useState(null);
@@ -14,15 +15,44 @@ export default function App() {
   const [completionTime, setCompletionTime] = useState(null);
   const [leaderboardSessionId, setLeaderboardSessionId] = useState(null);
 
+  const [scenes, setScenes] = useState([]);
+
+  useEffect(() => {
+    fetch(`${APIURL}api/images`)
+      .then(res => res.json())
+      .then(data => setScenes(data));
+  }, []);
+
+  function getNextSceneId() {
+    if (!scenes.length) return null;
+
+    const index = scenes.findIndex(s => s.id === activeImageId);
+    if (index === -1) return null;
+
+    const nextIndex = (index + 1) % scenes.length;
+    return scenes[nextIndex]?.id ?? null;
+  }
+
   function handlePlay(imageId) {
+    if (imageId === null) return null;
     setLeaderboardOpen(false);
+    setLeaderboardMode(null);
+    setCompletionTime(null);
+    setLeaderboardSceneId(null);
+    setLeaderboardSessionId(null);
+
     setActiveImageId(imageId);
+    setTarget(null);
     setView("game");
   }
 
   function handleBackToMenu() {
     setLeaderboardOpen(false);
+    setLeaderboardMode(null);
+    setCompletionTime(null);
+    setLeaderboardSceneId(null);
     setLeaderboardSessionId(null);
+
     setActiveImageId(null);
     setTarget(null);
     setView("menu");
@@ -46,13 +76,15 @@ export default function App() {
     <>
       {view === "menu" && (
         <SceneSelect 
-          onPlay={handlePlay} 
+          scenes={scenes}
+          onPlay={handlePlay}
           onPreview={openPreview}
         />
       )}
 
       {view === "game" && activeImageId && (
-        <Gameboard 
+        <Gameboard
+          key={activeImageId}
           imageId={activeImageId}
           target={target}
           setTarget={setTarget}
@@ -68,7 +100,11 @@ export default function App() {
         gameSessionId={leaderboardSessionId}
         time={completionTime}
         onClose={handleBackToMenu}
-        onPlay={() => handlePlay(leaderboardSceneId)}
+        onPlay={
+          leaderboardMode === "complete" 
+          ? () => handlePlay(getNextSceneId())
+          : () => handlePlay(leaderboardSceneId)
+        }
       />
     </>
   );

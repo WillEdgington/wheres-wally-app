@@ -1,26 +1,9 @@
 import { useEffect, useState, useRef } from "react";
 import { SCENES } from "../scenes";
 import Scrollbar from "./Scrollbar";
-import { APIURL } from "../utils/config";
 
-export default function SceneSelect({ onPlay, onPreview }) {
-  const [scenes, setScenes] = useState([]);
+export default function SceneSelect({ scenes, onPlay, onPreview }) {
   const gridRef = useRef(null);
-  
-  useEffect(() => {
-    fetch(`${APIURL}api/images`)
-      .then(res => res.json())
-      .then(images => {
-        const merged = images.map(img => {
-            const local = SCENES.find(s => s.id === img.id);
-            return local
-              ? { ...img, image: local.image }
-              : null;
-        }).filter(Boolean);
-
-        setScenes(merged);
-      });
-  }, []);
 
   return (
     <>
@@ -37,7 +20,10 @@ export default function SceneSelect({ onPlay, onPreview }) {
               className="scene-card"
               onClick={() => onPreview(scene.id)}
             >
-              <img src={scene.image} alt={scene.title} />
+              <img 
+                src={SCENES.find(s => s.id === scene.id)?.image} 
+                alt={scene.title} 
+              />
               <h3>{scene.title}</h3>
               <button
                 className="play-button"
