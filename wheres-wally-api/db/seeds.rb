@@ -90,3 +90,39 @@ Character.create!([
   { name: "Woof", x: 68.2, y: 61.7, image: banquet },
   { name: "Odlaw", x: 40.3, y: 60.2, image: banquet },
 ])
+
+toys = Image.create!(
+  title: "Toys!, Toys!, Toys!"
+)
+
+Character.create!([
+  { name: "Wally", x: 17.2, y: 71.5, image: toys },
+  { name: "Wizard", x: 79.5, y: 10.8, image: toys },
+  { name: "Wilma", x: 32.3, y: 82.8, image: toys },
+  { name: "Woof", x: 81.3, y: 91.1, image: toys },
+  { name: "Odlaw", x: 95.9, y: 36.9, image: toys },
+])
+
+beach = Image.create!(
+  title: "On the Beach"
+)
+
+Character.create!([
+  { name: "Wally", x: 61.8, y: 37.4, image: beach },
+  { name: "Wizard", x: 27.0, y: 35.2, image: beach },
+  { name: "Wilma", x: 77.4, y: 40.9, image: beach },
+  { name: "Woof", x: 68.1, y: 37.6, image: beach },
+  { name: "Odlaw", x: 10.9, y: 35.6, image: beach },
+])
+
+ski = Image.create!(
+  title: "Ski Slopes"
+)
+
+Character.create!([
+  { name: "Wally", x: 85.6, y: 72.5, image: ski },
+  { name: "Wizard", x: 7.0, y: 75.5, image: ski },
+  { name: "Wilma", x: 49.1, y: 41.6, image: ski },
+  { name: "Woof", x: 29.7, y: 71.8, image: ski },
+  { name: "Odlaw", x: 31.8, y: 63.7, image: ski },
+])
