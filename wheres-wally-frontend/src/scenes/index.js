@@ -1,14 +1,13 @@
-import { id } from "ethers";
-import scene1 from "../assets/scene_1.jpg";
-import scene2 from "../assets/scene_2.jpg";
-import scene3 from "../assets/scene_3.jpg";
-import scene4 from "../assets/scene_4.jpg";
-import scene5 from "../assets/scene_5.jpg";
-import scene6 from "../assets/scene_6.jpg";
-import scene7 from "../assets/scene_7.jpg";
-import scene8 from "../assets/scene_8.jpg";
-import scene9 from "../assets/scene_9.jpg";
-import scene10 from "../assets/scene_10.jpg";
+import scene1 from "../assets/scenes/scene_1.jpg";
+import scene2 from "../assets/scenes/scene_2.jpg";
+import scene3 from "../assets/scenes/scene_3.jpg";
+import scene4 from "../assets/scenes/scene_4.jpg";
+import scene5 from "../assets/scenes/scene_5.jpg";
+import scene6 from "../assets/scenes/scene_6.jpg";
+import scene7 from "../assets/scenes/scene_7.jpg";
+import scene8 from "../assets/scenes/scene_8.jpg";
+import scene9 from "../assets/scenes/scene_9.jpg";
+import scene10 from "../assets/scenes/scene_10.jpg";
 
 export const SCENES = [
   {
