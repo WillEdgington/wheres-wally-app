@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import TargetBox from "./TargetBox"
 import FoundMarker from "./FoundMarker";
 import Timer from "./Timer";
-import { SCENES } from "../scenes";
-import { APIURL } from "../utils/config";
+import { SCENES } from "../../scenes";
+import { APIURL } from "../../utils/config";
 
 export default function Gameboard({ imageId, target, setTarget, onComplete }) {
   const [foundCharacters, setFoundCharacters] = useState({});

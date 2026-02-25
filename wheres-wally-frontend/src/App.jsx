@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import Gameboard from './components/Gameboard';
-import SceneSelect from './components/SceneSelect';
+import Gameboard from './components/game/Gameboard';
+import SceneSelect from './components/menu/SceneSelect';
 import Leaderboard from './components/Leaderboard';
 import { APIURL } from './utils/config';
 

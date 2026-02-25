@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { SCENES } from "../scenes";
+import { SCENES } from "../../scenes";
 import Scrollbar from "./Scrollbar";
 
 export default function SceneSelect({ scenes, onPlay, onPreview }) {
