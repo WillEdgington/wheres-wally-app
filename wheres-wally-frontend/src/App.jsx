@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import Gameboard from './components/game/Gameboard';
 import SceneSelect from './components/menu/SceneSelect';
 import Leaderboard from './components/Leaderboard';
 import { APIURL } from './utils/config';
+import GameShell from './components/game/GameShell';
 
 export default function App() {
   const [target, setTarget] = useState(null);
@@ -83,11 +83,9 @@ export default function App() {
       )}
 
       {view === "game" && activeImageId && (
-        <Gameboard
+        <GameShell 
           key={activeImageId}
           imageId={activeImageId}
-          target={target}
-          setTarget={setTarget}
           onExit={handleBackToMenu}
           onComplete={(time, sessionId) => openCompletion(activeImageId, time, sessionId)}
         />

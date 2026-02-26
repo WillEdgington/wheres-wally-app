@@ -6,7 +6,7 @@ export default function SceneSelect({ scenes, onPlay, onPreview }) {
   const gridRef = useRef(null);
 
   return (
-    <>
+    <div className="scene-menu">
       <div className="scene-header">
         <h1>Where’s Wally?</h1>
         <p>Select a scene to begin</p>
@@ -43,6 +43,6 @@ export default function SceneSelect({ scenes, onPlay, onPreview }) {
           elemName={"carousel"}
         />
       </div>
-    </>
+    </div>
   );
 }

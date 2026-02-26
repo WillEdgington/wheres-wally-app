@@ -1,3 +1,7 @@
+.scene-menu {
+  padding: 0.4rem;
+}
+
 .scene-carousel {
   position: relative;
   overflow: visible;
