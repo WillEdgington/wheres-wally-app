@@ -1,5 +1,6 @@
 .scene-menu {
   padding: 0.4rem;
+  overflow-y: hidden;
 }
 
 .scene-carousel {
@@ -25,7 +26,8 @@
 }
 
 .scene-card {
-  flex: 0 0 min(360px, 80vw);
+  flex: 0 0 min(max(360px, 22vw), 80vw);
+  aspect-ratio: 18 / 15;
   background: #ffffff;
   border-radius: 10px;
   overflow: hidden;
