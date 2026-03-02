@@ -3,6 +3,8 @@
 A **full-stack photo tagging application** inspired by ***"Where's Wally?"***.
 Players must locate hidden characters within large illustrated scenes as quickly as possible. The application **tracks completion time**, **validates click coordinates securely** via a **Rails API**, and maintains a **leaderboard of top scores**.
 
+> **Disclaimer:** This project is a non-commercial, educational application built for the Odin Project course.
+
 ## Live Demo
 [![Demo](https://img.youtube.com/vi/wI-aF3a7mzQ/0.jpg)](https://www.youtube.com/watch?v=wI-aF3a7mzQ)
 
